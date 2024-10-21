@@ -112,9 +112,25 @@ private List<Livro>livros = new ArrayList<>();
     }
 
     public List<Livro> retornarTopCincoLivros(){
-        List<Livro> cleber = new ArrayList<>();
-        return cleber;
+            List<Livro> listaCincoLivros = new ArrayList<>();
+
+            if (livros.isEmpty()) {
+                return listaCincoLivros;
+            }
+
+            for (int i = 0; i < livros.size(); i++) {
+                Livro livroAtual = livros.get(i);
+
+                listaCincoLivros.add(livroAtual);
+            }
+
+            listaCincoLivros.sort((livro1, livro2) -> Double.compare(livro2.calcularMediaAvaliacoes(), livro1.calcularMediaAvaliacoes()));
+
+            if (listaCincoLivros.size() > 5) {
+                return listaCincoLivros.subList(0, 5);
+            }
+            return listaCincoLivros;
+        }
     }
 
 
-}
